@@ -52,6 +52,7 @@ function SinglePost(props) {
                 </Grid.Row>
             </Grid>
         )
+        console.log(postMarkup)
     }
     return (
         postMarkup

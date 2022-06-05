@@ -18,9 +18,10 @@
 - [ ] User to be able to edit his basic information.
 - [ ] getUsers apollo query.
 - [ ] users to be able to upload Post Feature Image.
-- [ ] textrich editor.
-- [ ] User/Admin input Santization.
-- [ ] Only admins can promot/register admins.
+- [ ] Textrich editor.
+- [ ] User/Admin input Sanitization.
+- [ ] Only admins can promot/create admins.
+- [ ] All Users tab in Admin page.
 - [ ] Home Slider.
 - [ ] Footer.
 - [ ] Demo.

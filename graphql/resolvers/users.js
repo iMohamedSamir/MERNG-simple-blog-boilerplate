@@ -16,6 +16,17 @@ const generateToken = (user) => {
     { expiresIn: '1h' });
 }
 export const userResolvers = {
+    Query: {
+        getUsers: async () => {
+            try {
+                const users = await User.find().sort({createdAt: -1});
+                console.log(users)
+                return users;
+            } catch (err) {
+                throw new Error(err)
+            };
+        },
+    },
     Mutation: {
         async login(_, {username, password}) {
             const {errors, valid} = validateLoginInput(username, password);
