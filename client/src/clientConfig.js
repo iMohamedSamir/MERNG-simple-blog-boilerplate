@@ -1,5 +1,6 @@
 export const clientConfig = {
     menuLinks: {
-        blog: 'News'
+        blog: 'News',
+        admin: 'cpanel'
     }
 }

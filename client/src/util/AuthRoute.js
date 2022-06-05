@@ -5,13 +5,13 @@ import { AuthContext } from '../context/auth'
 
 function AuthRoute({ component: Component, ...rest }){
     const { user } = useContext(AuthContext);
-
+    user && user.isAdmin ? console.log('Admin') : console.log('Not Admin')
     return (
         <Route 
         {...rest}
         render={ 
             props => 
-            user ? <Redirect to="/" /> : <Component {...props} /> 
+            user && !user.isAdmin ? <Redirect to="/" /> : <Component {...props} /> 
         }
         />
     )

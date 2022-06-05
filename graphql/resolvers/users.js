@@ -9,7 +9,8 @@ const generateToken = (user) => {
     return jwt.sign({
         id: user.id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        isAdmin: user.isAdmin
     }, 
     config.jwtSecret, 
     { expiresIn: '1h' });
@@ -35,11 +36,12 @@ export const userResolvers = {
 
             const token = generateToken(user)
 
-            return {
-                ...user._doc,
-                id: user._id,
-                token
-            }
+                return {
+                    ...user._doc,
+                    id: user._id,
+                    ...user.isAdmin,
+                    token
+                }
         },
         async register(_, {
             registerInput: {

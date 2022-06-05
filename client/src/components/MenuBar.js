@@ -31,6 +31,15 @@ function MenuBar() {
           to="/blog"
         />
         <Menu.Menu position='right'>
+          {user.isAdmin && (
+              <Menu.Item
+              name={clientConfig.menuLinks.admin}
+              active={activeItem === clientConfig.menuLinks.admin}
+              onClick={handleItemClick}
+              as={Link}
+              to={`/admin`}
+            />
+          )}
           <Menu.Item
             name={user.username}
             active={activeItem === user.username}

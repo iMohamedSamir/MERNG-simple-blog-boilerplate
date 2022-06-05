@@ -26,8 +26,7 @@ function Register(props) {
             props.history.push('/')
         },
         onError(err) {
-            console.log(err)
-            // setErrors(err || err.graphQLErrors[0].extensions ? err.graphQLErrors[0].extensions.errors : '');
+            setErrors(err && err.graphQLErrors[0].extensions ? err.graphQLErrors[0].extensions.errors : '');
         },
         variables: values,
     });

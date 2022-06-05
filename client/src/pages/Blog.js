@@ -13,10 +13,9 @@ function Blog() {
         return (
             <Item.Group>
                 <h2>Recent Posts</h2>
-            {loading ? (<h1> Posts is loading...</h1>) : (posts && posts.map((post) => (
+                {loading ? (<h1> Posts is loading...</h1>) : (posts && posts.map((post) => (
                     <PostCard key={post.id} post={post} />
                 )))}
-
             </Item.Group>
 
         );

@@ -36,6 +36,10 @@ export const postResolvers = {
         // Create.
         async createPost(_, { title, body }, context) {
             const user = checkAuth(context)
+
+            if(title.trim() === '') throw new Error('Title Can not be empty.')
+            if(body.trim() === '') throw new Error('Body Can not be empty.')
+
             const newPost = new Post({
                 title,
                 body,

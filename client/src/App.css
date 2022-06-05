@@ -2,3 +2,14 @@
   width: 50%;
   margin: auto;
 }
+.no-shadow{
+  box-shadow: none!important;
+}
+.no-padding{
+  padding: 0!important;
+}
+
+.ui.comments {
+  margin: 0.5em 0;
+  max-width: 100%;
+}

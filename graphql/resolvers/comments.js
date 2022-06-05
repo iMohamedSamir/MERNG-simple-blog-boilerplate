@@ -14,7 +14,7 @@ export const commentsResolver = {
                     }
                 });
             } 
-            
+            //TODO: add comment counter
             const post = await Post.findById(postId);
             if(post) {
                 post.comments.unshift({
