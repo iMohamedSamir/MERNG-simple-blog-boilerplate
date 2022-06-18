@@ -8,15 +8,18 @@
 - [x] Dynamic Navigation bar.
 - [x] User profile page.
 - [x] Blog post Comments.
+- [+] getUsers apollo query.
+- [+] Admin is able to delete posts from admin panel
 
 ## To be added:
+- [ ] Admin is able to delete users from admin panel
+- [ ] Admin is able to edit users/posts from admin panel
 - [ ] Replay comment.
 - [ ] Admin to be able to delete any Post.
 - [ ] Dynamic pages system (Admin is able to create/edit/delete new pages and its content).
 - [ ] Users to be able to delete their own Posts.
 - [ ] User to be able to see he's own posts in the Profile page
 - [ ] User to be able to edit his basic information.
-- [ ] getUsers apollo query.
 - [ ] users to be able to upload Post Feature Image.
 - [ ] Textrich editor.
 - [ ] User/Admin input Sanitization.

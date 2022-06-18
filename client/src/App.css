@@ -2,21 +2,41 @@
   width: 50%;
   margin: auto;
 }
-.no-shadow{
-  box-shadow: none!important;
+
+.no-shadow {
+  box-shadow: none !important;
 }
-.no-padding{
-  padding: 0!important;
+
+.no-padding {
+  padding: 0 !important;
 }
 
 .ui.comments {
   margin: 0.5em 0;
   max-width: 100%;
 }
+
 /*
 * Tabs
 */
 
-.ui.vertical.tabular.menu .active.item{
+.admin-tabs>div>div>div:nth-child(1) .active.item {
   background-color: #fff;
+  z-index: 99;
+}
+
+.admin-tabs>div>div>div:nth-child(1) {
+  padding-right: 0px !important;
+}
+
+.admin-tabs>div>div>div:nth-child(2) {
+  padding-left: 0px !important;
+  margin-left: -1px !important;
+}
+
+.floating-btn {
+  position: fixed !important;
+  right: 135px !important;
+  top: 80px !important;
+  padding: 0.7em 0.9em .7em !important;
 }

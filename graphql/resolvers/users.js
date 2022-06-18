@@ -11,16 +11,15 @@ const generateToken = (user) => {
         email: user.email,
         username: user.username,
         isAdmin: user.isAdmin
-    }, 
-    config.jwtSecret, 
-    { expiresIn: '1h' });
+    },
+        config.jwtSecret,
+        { expiresIn: '1h' });
 }
 export const userResolvers = {
     Query: {
         getUsers: async () => {
             try {
-                const users = await User.find().sort({createdAt: -1});
-                console.log(users)
+                const users = await User.find().sort({ createdAt: -1 });
                 return users;
             } catch (err) {
                 throw new Error(err)
@@ -28,31 +27,31 @@ export const userResolvers = {
         },
     },
     Mutation: {
-        async login(_, {username, password}) {
-            const {errors, valid} = validateLoginInput(username, password);
-            const user = await User.findOne({username})
-            if(!valid) {
+        async login(_, { username, password }) {
+            const { errors, valid } = validateLoginInput(username, password);
+            const user = await User.findOne({ username })
+            if (!valid) {
                 throw new UserInputError('Errors.', { errors });
             }
-            if(!user) {
+            if (!user) {
                 errors.generals = 'User is not found.';
                 throw new UserInputError('User is not found.', { errors });
             }
 
             const match = await bcrypt.compare(password, user.password);
-            if(!match) {
+            if (!match) {
                 errors.generals = 'Wrong credentials.';
                 throw new UserInputError('Wrong credentials.', { errors });
             }
 
             const token = generateToken(user)
 
-                return {
-                    ...user._doc,
-                    id: user._id,
-                    ...user.isAdmin,
-                    token
-                }
+            return {
+                ...user._doc,
+                id: user._id,
+                ...user.isAdmin,
+                token
+            }
         },
         async register(_, {
             registerInput: {
@@ -65,19 +64,19 @@ export const userResolvers = {
         }) {
             // Validate user data.
             const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword)
-            if(!valid) {
+            if (!valid) {
                 throw new UserInputError('errors', { errors });
             }
             // Validate username/email is unique.
             const user = await User.findOne({ username });
             // const vEmail = await User.findOne({ email });
-            if(user) {
+            if (user) {
                 throw new UserInputError('This username is taken.', {
                     errors: {
                         username: 'This username is taken'
                     }
                 })
-            } 
+            }
             // else if(vEmail) {
             //     throw new UserInputError('Email is already been used.', {
             //         errors: {
@@ -95,9 +94,9 @@ export const userResolvers = {
                 isAdmin
             });
             const res = await newUser.save();
-            
+
             const token = generateToken(res)
-            
+
             return {
                 ...res._doc,
                 id: res._id,

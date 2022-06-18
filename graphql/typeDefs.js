@@ -27,6 +27,8 @@ export const typeDefs = gql `
         token: String!
         createdAt: String
         username: String!
+        phone: String
+        role: String
         isAdmin: Boolean!
     }
     input RegisterInput {

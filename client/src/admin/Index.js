@@ -1,14 +1,17 @@
-import React from 'react';
-import PostForm from '../components/PostForm'
-import UsersTab from '../components/UsersTab';
+import React, { useContext } from 'react';
+import UserTabs from '../components/UserTabs';
+import { AuthContext } from '../context/auth';
 
 function Index(props) {
-    return (
+    const { user } = useContext(AuthContext);
+    const adminIndex = user && user.isAdmin ? (
         <>
-            <UsersTab /><br /><br /><br />
-            <PostForm/>
+            <div className="admin-tabs">
+                <UserTabs />
+            </div>
         </>
-    );
+        //TODO: refactor this
+    ) : ('you are not allowed here');
+    return adminIndex;
 }
-
 export default Index;
