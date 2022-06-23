@@ -1,24 +1,30 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react'
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu } from "semantic-ui-react";
 
-import { AuthContext } from '../context/auth';
-import { clientConfig } from '../clientConfig';
+import { clientConfig } from "../clientConfig";
+import { AuthActions } from "../store/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function MenuBar() {
-  const { user, logout } = useContext(AuthContext)
+  const user = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
 
-  const handleItemClick = (e, { name }) => setActiveItem(name)
+  const newLogout = () => {
+    dispatch(AuthActions.logout());
+  };
+
+  const handleItemClick = (e, { name }) => setActiveItem(name);
 
   const pathname = window.location.pathname;
-  const path = pathname === '/' ? 'home' : pathname.substring(1);
+  const path = pathname === "/" ? "home" : pathname.substring(1);
   const [activeItem, setActiveItem] = useState(path);
   const menubar = user ? (
     <div>
-      <Menu pointing secondary size='large' color='teal'>
+      <Menu pointing secondary size="large" color="teal">
         <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
+          name="home"
+          active={activeItem === "home"}
           onClick={handleItemClick}
           as={Link}
           to="/"
@@ -30,9 +36,9 @@ function MenuBar() {
           as={Link}
           to="/blog"
         />
-        <Menu.Menu position='right'>
+        <Menu.Menu position="right">
           {user.isAdmin && (
-              <Menu.Item
+            <Menu.Item
               name={clientConfig.menuLinks.admin}
               active={activeItem === clientConfig.menuLinks.admin}
               onClick={handleItemClick}
@@ -48,9 +54,9 @@ function MenuBar() {
             to={`/u/${user.username}`}
           />
           <Menu.Item
-            name='logout'
-            active={activeItem === 'logout'}
-            onClick={logout}
+            name="logout"
+            active={activeItem === "logout"}
+            onClick={newLogout}
             as={Link}
             to="/logout"
           />
@@ -59,32 +65,32 @@ function MenuBar() {
     </div>
   ) : (
     <div>
-      <Menu pointing secondary size='large' color='teal'>
+      <Menu pointing secondary size="large" color="teal">
         <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
+          name="home"
+          active={activeItem === "home"}
           onClick={handleItemClick}
           as={Link}
           to="/"
         />
         <Menu.Item
-          name='blog'
-          active={activeItem === 'blog'}
+          name="blog"
+          active={activeItem === "blog"}
           onClick={handleItemClick}
           as={Link}
           to="/blog"
         />
-        <Menu.Menu position='right'>
+        <Menu.Menu position="right">
           <Menu.Item
-            name='login'
-            active={activeItem === 'login'}
+            name="login"
+            active={activeItem === "login"}
             onClick={handleItemClick}
             as={Link}
             to="/login"
           />
           <Menu.Item
-            name='register'
-            active={activeItem === 'register'}
+            name="register"
+            active={activeItem === "register"}
             onClick={handleItemClick}
             as={Link}
             to="/register"
@@ -92,7 +98,7 @@ function MenuBar() {
         </Menu.Menu>
       </Menu>
     </div>
-  )
-  return menubar
+  );
+  return menubar;
 }
-export default MenuBar; 
+export default MenuBar;

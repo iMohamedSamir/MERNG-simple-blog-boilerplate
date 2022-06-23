@@ -1,5 +1,7 @@
 # MERNG-simple-blog-boilerplate
-## Main Features: 
+
+## Main Features:
+
 - [x] Simple Blog boilerplate.
 - [x] Simple Admin/User system.
 - [x] Guest can register new accounts.
@@ -10,8 +12,12 @@
 - [x] Blog post Comments.
 - [+] getUsers apollo query.
 - [+] Admin is able to delete posts from admin panel
+- [+] Users/Posts tab in Admin page.
+- [+] delete post
+- [+] convert contextAPI to redux store
 
 ## To be added:
+
 - [ ] Admin is able to delete users from admin panel
 - [ ] Admin is able to edit users/posts from admin panel
 - [ ] Replay comment.
@@ -24,8 +30,9 @@
 - [ ] Textrich editor.
 - [ ] User/Admin input Sanitization.
 - [ ] Only admins can promot/create admins.
-- [ ] All Users tab in Admin page.
 - [ ] Home Slider.
+- [ ] Pagination.
+- [ ] Bulk users/posts delete
 - [ ] Footer.
 - [ ] Demo.
 - [ ] Clear debugging snippets.

@@ -1,21 +1,38 @@
-import React from 'react';
-import { Table } from 'semantic-ui-react'
-function AdminUsersList(props) {
-    const { username, email, createdAt, phone, userrole } = props
-    return (
-        <>
+import React from "react";
+import { Grid, Button } from "semantic-ui-react";
+import AdminEditUser from "./AdminEditUser";
+import PopupModel from "./PopupModel";
 
-            <Table.Body>
-                <Table.Row>
-                    <Table.Cell>{username}</Table.Cell>
-                    <Table.Cell>{createdAt}</Table.Cell>
-                    <Table.Cell>{email}</Table.Cell>
-                    <Table.Cell>{phone}</Table.Cell>
-                    <Table.Cell>{userrole}</Table.Cell>
-                </Table.Row>
-            </Table.Body>
-        </>
-    );
+function AdminUsersList(props) {
+  const { username, email, createdAt, phone, userrole } = props;
+  return (
+    <>
+      <Grid.Row>
+        <Grid.Column>{username}</Grid.Column>
+        <Grid.Column>{createdAt}</Grid.Column>
+        <Grid.Column>{email}</Grid.Column>
+        <Grid.Column>{phone}</Grid.Column>
+        <Grid.Column>{userrole}</Grid.Column>
+        <Grid.Column>
+          <Grid.Column>
+            <PopupModel
+              size="tiny"
+              icon="edit"
+              content={
+                <AdminEditUser
+                  type="editingUsers"
+                  userId={"s"}
+                  title={"this is title"}
+                  body={"body"}
+                />
+              }
+            />
+            <Button size="tiny" icon="delete"></Button>
+          </Grid.Column>
+        </Grid.Column>
+      </Grid.Row>
+    </>
+  );
 }
 
 export default AdminUsersList;

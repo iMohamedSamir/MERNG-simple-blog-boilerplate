@@ -3,13 +3,13 @@ import { Button, Modal } from 'semantic-ui-react';
 
 function PopupModel(props) {
     const [open, setOpen] = useState(false)
-    const { buttonName, content } = props
+    const { buttonName, content, icon, color, size } = props
     return (
         <Modal
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button color='purple'>{buttonName}</Button>}
+            trigger={<Button icon={icon} size={size} color={color}>{buttonName && buttonName}</Button>}
         >
             <Modal.Header>Add new Post</Modal.Header>
             <Modal.Content image>

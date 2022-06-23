@@ -1,20 +1,28 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { useSelector } from "react-redux";
+import { Button, Form, TextArea } from "semantic-ui-react";
 import { useForm } from "../util/hooks";
 
-function PostForm(props) {
+function AdminEditPost(props) {
+  const { postId } = props;
+
+  const posts = useSelector((state) => state.posts.content);
+  const existingPost = posts.find((post) => post.id === postId);
+
+  const initialValues = {
+    body: existingPost.body,
+    title: existingPost.title,
+  };
+
   const [inputError, setInputError] = useState({});
 
   const { onSubmit, onChange, onCheckChange, values } = useForm(
     createPostCallback,
-    {
-      title: "",
-      body: "",
-    }
+    initialValues
   );
 
-  const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
+  const [updatePost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(_, result) {
       values.title = "";
@@ -25,7 +33,7 @@ function PostForm(props) {
     // }
   });
   function createPostCallback() {
-    createPost();
+    updatePost();
   }
 
   return (
@@ -40,16 +48,19 @@ function PostForm(props) {
             value={values.title}
             error={inputError.title}
           />
-          <Form.Input
+          <TextArea
+            style={{ minHeight: 100 }}
             placeholder="xxxx"
             name="body"
             onChange={onChange}
             value={values.body}
             error={inputError.body}
           />
-          <Button type="submit" color="teal">
-            Submit
-          </Button>
+          <Button.Group floated="right">
+            <Button type="submit" color="teal">
+              Submit
+            </Button>
+          </Button.Group>
         </Form.Field>
       </Form>
     </>
@@ -78,5 +89,4 @@ const CREATE_POST_MUTATION = gql`
     }
   }
 `;
-
-export default PostForm;
+export default AdminEditPost;
