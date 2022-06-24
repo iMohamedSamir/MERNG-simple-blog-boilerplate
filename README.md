@@ -10,11 +10,11 @@
 - [x] Dynamic Navigation bar.
 - [x] User profile page.
 - [x] Blog post Comments.
-- [+] getUsers apollo query.
-- [+] Admin is able to delete posts from admin panel
-- [+] Users/Posts tab in Admin page.
-- [+] delete post
-- [+] convert contextAPI to redux store
+- [x] getUsers apollo query.
+- [x] Admin is able to delete posts from admin panel
+- [x] Users/Posts tab in Admin page.
+- [x] delete post
+- [x] convert contextAPI to redux store
 
 ## To be added:
 
@@ -37,3 +37,6 @@
 - [ ] Demo.
 - [ ] Clear debugging snippets.
 - [ ] Documentation.
+- [ ] logical delete.
+- [ ] migrate to mui.
+- [ ] update react state after delete using useEffect.
