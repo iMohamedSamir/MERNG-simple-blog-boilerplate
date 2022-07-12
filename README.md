@@ -16,7 +16,7 @@
 - [x] delete post
 - [x] convert contextAPI to redux store
 - [x] gql api server to heroku (for easier development).
-- [x] Admin is able to add/edit/delete posts from admin panel
+- [x] Admin is able to add/edit/delete posts from admin panel.
 
 ## To be added:
 - [ ] Admin is able to add/edit/delete users from admin panel
@@ -24,7 +24,7 @@
 - [ ] Admin to be able to delete any Post.
 - [ ] Dynamic pages system (Admin is able to create/edit/delete new pages and its content)
 - [ ] Users to be able to delete their own Posts.
-- [ ] User to be able to see he's own posts in the Profile page
+- [ ] User to be able to see their own posts in the Profile page
 - [ ] User to be able to edit his basic information.
 - [ ] users to be able to upload Post Feature Image.
 - [ ] Textrich editor.
@@ -39,4 +39,4 @@
 - [ ] Documentation.
 - [ ] logical delete.
 - [ ] migrate to mui.
-- [ ] update react state after delete using useEffect.
+- [ ] few cosmotics.
