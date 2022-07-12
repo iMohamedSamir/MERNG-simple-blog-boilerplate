@@ -16,14 +16,13 @@
 - [x] delete post
 - [x] convert contextAPI to redux store
 - [x] gql api server to heroku (for easier development).
+- [x] Admin is able to add/edit/delete posts from admin panel
 
 ## To be added:
-
-- [ ] Admin is able to delete users from admin panel
-- [ ] Admin is able to edit users/posts from admin panel
+- [ ] Admin is able to add/edit/delete users from admin panel
 - [ ] Replay comment.
 - [ ] Admin to be able to delete any Post.
-- [ ] Dynamic pages system (Admin is able to create/edit/delete new pages and its content).
+- [ ] Dynamic pages system (Admin is able to create/edit/delete new pages and its content)
 - [ ] Users to be able to delete their own Posts.
 - [ ] User to be able to see he's own posts in the Profile page
 - [ ] User to be able to edit his basic information.
