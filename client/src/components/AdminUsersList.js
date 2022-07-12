@@ -4,7 +4,7 @@ import AdminEditUser from "./AdminEditUser";
 import PopupModel from "./PopupModel";
 
 function AdminUsersList(props) {
-  const { username, email, createdAt, phone, userrole } = props;
+  const { username, email, createdAt, phone, userrole } = props.user;
   return (
     <>
       <Grid.Row>

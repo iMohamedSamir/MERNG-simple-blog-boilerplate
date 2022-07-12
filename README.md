@@ -15,6 +15,7 @@
 - [x] Users/Posts tab in Admin page.
 - [x] delete post
 - [x] convert contextAPI to redux store
+- [x] gql api server to heroku (for easier development).
 
 ## To be added:
 

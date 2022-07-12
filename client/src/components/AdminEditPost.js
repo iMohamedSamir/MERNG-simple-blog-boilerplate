@@ -1,11 +1,15 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, TextArea } from "semantic-ui-react";
+import { postsActions } from "../store/PostsSlice";
+import { FETCH_POSTS_QUERY } from "../util/graphql";
 import { useForm } from "../util/hooks";
 
 function AdminEditPost(props) {
   const { postId } = props;
+
+  const dispatch = useDispatch();
 
   const posts = useSelector((state) => state.posts.content);
   const existingPost = posts.find((post) => post.id === postId);
@@ -21,12 +25,19 @@ function AdminEditPost(props) {
     createPostCallback,
     initialValues
   );
-
-  const [updatePost, { error }] = useMutation(CREATE_POST_MUTATION, {
-    variables: values,
-    update(_, result) {
+  
+  const [updatePost, { error }] = useMutation(EDIT_POST, {
+    variables: {...values, postId},
+    update(proxy, result) {
+      const { data: {editPost: editedPost} } = result
+      const {title: newTitle, body: newBody} = editedPost 
+      console.log("resaultresault", editedPost)
+      let data = proxy.readQuery({query: FETCH_POSTS_QUERY})
+      data = { getPosts: editedPost }
+      proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
       values.title = "";
       values.body = "";
+      dispatch(postsActions.editPost(editedPost))
     },
     // onError(err) {
     //     setInputError(err && err.graphQLErrors[0].extensions ? err.graphQLErrors[0].extensions : '')
@@ -66,27 +77,26 @@ function AdminEditPost(props) {
     </>
   );
 }
-
-const CREATE_POST_MUTATION = gql`
-  mutation createPost($title: String!, $body: String!) {
-    createPost(title: $title, body: $body) {
-      title
-      body
+const EDIT_POST = gql`
+mutation editPost($postId: ID!, $title: String!, $body: String!) {
+  editPost(postId: $postId, title: $title, body: $body) {
+    title
+    body
+    id
+    createdAt
+    username
+    likes {
       id
-      createdAt
       username
-      likes {
-        id
-        username
-        createdAt
-      }
-      comments {
-        id
-        body
-        username
-        createdAt
-      }
+      createdAt
+    }
+    comments {
+      id
+      body
+      username
+      createdAt
     }
   }
-`;
+}
+`
 export default AdminEditPost;

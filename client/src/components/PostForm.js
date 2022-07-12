@@ -2,13 +2,14 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useForm } from "../util/hooks";
+import { FETCH_POSTS_QUERY } from "../util/graphql";
+import { useDispatch } from "react-redux";
+import { postsActions } from "../store/PostsSlice";
 
 function PostForm(props) {
   const [inputError, setInputError] = useState({});
-
-  const { onSubmit, onChange, onCheckChange, values } = useForm(
-    createPostCallback,
-    {
+  const dispatch = useDispatch();
+  const { onSubmit, onChange, onCheckChange, values } = useForm(createPostCallback, {
       title: "",
       body: "",
     }
@@ -16,9 +17,16 @@ function PostForm(props) {
 
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
-    update(_, result) {
+    update(proxy, resault) {
+      const {data: { createPost }} = resault
+      let data = proxy.readQuery({
+        query: FETCH_POSTS_QUERY,
+      });
+      data = { getPosts: [resault.data.createPost, ...data.getPosts] };
+      proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
       values.title = "";
       values.body = "";
+      dispatch(postsActions.AddPost(createPost))
     },
     // onError(err) {
     //     setInputError(err && err.graphQLErrors[0].extensions ? err.graphQLErrors[0].extensions : '')

@@ -40,3 +40,18 @@
   top: 80px !important;
   padding: 0.7em 0.9em .7em !important;
 }
+
+.ui.grid>.column:not(.row),
+.ui.grid>.row>.column {
+  padding-left: 0 !important;
+  padding-right: 0 !important
+}
+
+.ui.grid>.column:not(.row) {
+  z-index: 2;
+  /* margin-right: 1px; */
+}
+
+.ui.vertical.tabular.menu {
+  border-right: unset !important;
+}

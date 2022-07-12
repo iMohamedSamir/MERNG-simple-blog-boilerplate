@@ -8,42 +8,62 @@ import AdminPostsList from "./AdminPostsList";
 import AdminUsersList from "./AdminUsersList";
 import PopupModel from "./PopupModel";
 import Register from "../pages/Register";
-import { postsActions } from "../store/PostsSlice";
+import { postActions } from "../store/postsSlice";
 
 //TODO: Refactor this shit of a mess later.
 
-function UsersTabs() {
+function UsersTab() {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const [testValu, setTestValu] = useState("");
+  const handleDashboard = (e) => {
+    setTestValu("xxxxxoop");
+  };
+  const statePosts = useSelector((state) => state.posts);
 
-  const handlePosts = async () => {
-    const { data } = await refetchPosts();
-    setPosts(data.getPosts);
+  const handlePosts = async (e) => {
+    const {
+      data: { getPosts: postData },
+    } = await refetchPosts();
+    setPosts(postData);
+    dispatch(postActions.getPostsReducer(postData));
   };
 
-  const handleUsers = async () => { 
-    const { data } = await refetchUsers();
-    setUsers(data.getUsers);
+  const handleUsers = async (e) => {
+    const {
+      data: { getUsers: userData },
+    } = await refetchUsers();
+    setUsers(userData);
   };
 
-  const { data: FetchedPostsData, refetch: refetchPosts } = useQuery( FETCH_POSTS_QUERY, { manual: true } );
-  const { data: FetchedUsersData, refetch: refetchUsers } = useQuery( FETCH_USERS_QUERY, { manual: true } );
-  
+  const { data: FetchedPostsData, refetch: refetchPosts } = useQuery(
+    FETCH_POSTS_QUERY,
+    { manual: true }
+  );
   useEffect(() => {
-    posts && dispatch(postsActions.PostsReducer(posts))
+    posts.length > 0 && statePosts > 0 && setPosts(statePosts);
   }, [posts]);
 
-  const store = useSelector((state) => state);
+  const { data: FetchedUsersData, refetch: refetchUsers } = useQuery(
+    FETCH_USERS_QUERY,
+    { manual: true }
+  );
 
   let dashboard = (
-    <Tab.Pane><div key="xxxxxx4">{"testValu"}</div></Tab.Pane>
+    <Tab.Pane>
+      {testValu ? <div key="xxxxxx4">{testValu}</div> : "Val"}
+    </Tab.Pane>
   );
   //TODO: Refactor this
   let usersList = (
     <Tab.Pane>
-      <PopupModel color="purple" buttonName={"New User"} content={<Register />} />
+      <PopupModel
+        color="purple"
+        buttonName={"New User"}
+        content={<Register />}
+      />
       <Grid columns={6} celled color="grey">
         <Grid.Column>username</Grid.Column>
         <Grid.Column>Registration Date</Grid.Column>
@@ -56,29 +76,40 @@ function UsersTabs() {
             <>
               <AdminUsersList
                 key={user.id}
-                user={user}
+                username={user.username}
+                phone={user.phone}
+                userrole={user.role}
+                email={user.email}
+                createdAt={user.createdAt}
               />
             </>
           ))}
       </Grid>
     </Tab.Pane>
   );
-  console.log("store.posts.content>>", store.posts.content)
   const postList = (
     <Tab.Pane>
-      <PopupModel color="purple" buttonName={"New Post"} content={<PostForm />} />
+      <PopupModel
+        color="purple"
+        buttonName={"New Post"}
+        content={<PostForm />}
+      />
       <Grid columns={4} celled color="grey">
         <Grid.Column width={6}>Title</Grid.Column>
         <Grid.Column width={2}>Author</Grid.Column>
         <Grid.Column width={4}>CreatedAt</Grid.Column>
         <Grid.Column width={4}>actions</Grid.Column>
-        {(store.posts.content) ? (
-          // JSON.stringify(posts)
-          store.posts.content.map((post) => (
-            <AdminPostsList post={post} key={post.id} />
-          ))
-        ):( "loading" )
-        }
+        {posts &&
+          posts.map((post) => (
+            <AdminPostsList
+              key={post.id}
+              postId={post.id}
+              title={post.title}
+              body={post.body}
+              username={post.username}
+              createdAt={post.createdAt}
+            />
+          ))}
       </Grid>
     </Tab.Pane>
   );
@@ -86,21 +117,30 @@ function UsersTabs() {
   const panes = [
     {
       menuItem: (
-        <Menu.Item key="messages">Messages</Menu.Item>
-      ),render: () => dashboard,
+        <Menu.Item onClick={handleDashboard} key="messages">
+          Messages
+        </Menu.Item>
+      ),
+      render: () => dashboard,
     },
     {
       menuItem: (
-        <Menu.Item onClick={handleUsers} key="users">Users</Menu.Item>
-      ), render: () => usersList,
+        <Menu.Item onClick={handleUsers} key="users">
+          Users
+        </Menu.Item>
+      ),
+      render: () => usersList,
     },
     {
       menuItem: (
-        <Menu.Item onClick={handlePosts} key="posts">Posts</Menu.Item>
-      ), render: () => postList,
+        <Menu.Item onClick={handlePosts} key="posts">
+          Posts
+        </Menu.Item>
+      ),
+      render: () => postList,
     },
   ];
-  return (
+  let allTabs = (
     <Tab
       grid={{ paneWidth: 14, tabWidth: 2 }}
       menu={{ fluid: true, vertical: true, tabular: true }}
@@ -108,7 +148,8 @@ function UsersTabs() {
       panes={panes}
       renderActiveOnly={true}
     />
-  )
+  );
+  return allTabs;
 }
 const FETCH_POSTS_QUERY = gql`
   query {
@@ -140,4 +181,4 @@ const FETCH_USERS_QUERY = gql`
   }
 `;
 
-export default UsersTabs;
+export default UsersTab;
