@@ -6,12 +6,10 @@ import { postsActions } from "../store/PostsSlice";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 import { useForm } from "../util/hooks";
 
-function AdminEditPost(props) {
-  const { postId } = props;
-
+function AdminEditPost({ postId, setOpen }) {
   const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.content)
 
-  const posts = useSelector((state) => state.posts.content);
   const existingPost = posts.find((post) => post.id === postId);
 
   const initialValues = {
@@ -28,13 +26,11 @@ function AdminEditPost(props) {
   
   const [updatePost, { error }] = useMutation(EDIT_POST, {
     variables: {...values, postId},
-    update(proxy, result) {
-      const { data: {editPost: editedPost} } = result
-      const {title: newTitle, body: newBody} = editedPost 
-      console.log("resaultresault", editedPost)
+    update(proxy, { data: { editPost: editedPost } } ) {
       let data = proxy.readQuery({query: FETCH_POSTS_QUERY})
       data = { getPosts: editedPost }
       proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
+      setOpen(false)
       values.title = "";
       values.body = "";
       dispatch(postsActions.editPost(editedPost))

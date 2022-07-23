@@ -12,25 +12,22 @@ const PostSlice = createSlice({
           "content": action.payload
         }
       },
-      AddPost: (state, action) => {
-        const newPost = action.payload
-        console.log("newPost>0>", newPost)
+    AddPost: (state, action) => {
         return {
           ...state.content, 
           "content": [action.payload, ...state.content]
         }
       },
-      editPost: (state, action) => {
+    editPost: (state, action) => {
       return {
         ...state,
         "content": current(state).content.map(post => post.id === action.payload.id && action.payload || post)
       }
     },
     deletePost: (state, action) => {
-      const id = action.payload
       return {
         ...state, 
-        "content": current(state).content.filter((post) => (post.id !== id))
+        "content": current(state).content.filter((post) => (post.id !== action.payload))
       }
     },
   },

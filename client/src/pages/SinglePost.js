@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import moment from "moment";
-import React, { useContext } from "react";
+import React, { ReactDOM } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, Grid, Image, Item, Header } from "semantic-ui-react";
@@ -51,7 +51,7 @@ function SinglePost(props) {
                 {comments.length > 0 && ` ${comments.length} comments`}
                 {likes.length > 0 && ` ${likes.length} Likes`}
               </Card.Meta>
-              <Card.Content className="no-padding">{body}</Card.Content>
+              <Card.Content className="no-padding"><div dangerouslySetInnerHTML={{__html: body}} /></Card.Content>
             </Card>
             <Card fluid className="no-shadow">
               <Header as="h3" dividing>
@@ -69,7 +69,6 @@ function SinglePost(props) {
         </Grid.Row>
       </Grid>
     );
-    console.log(postMarkup);
   }
   return postMarkup;
 }

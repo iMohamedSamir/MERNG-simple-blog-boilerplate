@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Tab, Label, Menu, Grid } from "semantic-ui-react";
+import { Tab, Menu, Grid } from "semantic-ui-react";
 import PostForm from "../components/PostForm";
 import AdminPostsList from "./AdminPostsList";
 import AdminUsersList from "./AdminUsersList";
 import PopupModel from "./PopupModel";
 import Register from "../pages/Register";
 import { postsActions } from "../store/PostsSlice";
+import { UserActions } from "../store/UsersSlice";
+import { FETCH_POSTS_QUERY, FETCH_USERS_QUERY } from "../util/graphql";
 
 //TODO: Refactor this shit of a mess later.
 
@@ -18,6 +20,9 @@ function UsersTabs() {
 
   const dispatch = useDispatch()
 
+  const { data: FetchedPostsData, refetch: refetchPosts } = useQuery( FETCH_POSTS_QUERY, { manual: true } );
+  const { data: FetchedUsersData, refetch: refetchUsers } = useQuery( FETCH_USERS_QUERY, { manual: true } );
+  
   const handlePosts = async () => {
     const { data } = await refetchPosts();
     setPosts(data.getPosts);
@@ -28,22 +33,20 @@ function UsersTabs() {
     setUsers(data.getUsers);
   };
 
-  const { data: FetchedPostsData, refetch: refetchPosts } = useQuery( FETCH_POSTS_QUERY, { manual: true } );
-  const { data: FetchedUsersData, refetch: refetchUsers } = useQuery( FETCH_USERS_QUERY, { manual: true } );
-  
   useEffect(() => {
-    posts && dispatch(postsActions.PostsReducer(posts))
-  }, [posts]);
+    posts && dispatch(postsActions.PostsReducer(posts));
+    users && dispatch(UserActions.UserReducer(users));
+  }, [posts, users]);
 
   const store = useSelector((state) => state);
 
   let dashboard = (
-    <Tab.Pane><div key="xxxxxx4">{"testValu"}</div></Tab.Pane>
+    <Tab.Pane key="message"><div key="xxxxxx4">{"testValu"}</div></Tab.Pane>
   );
   //TODO: Refactor this
   let usersList = (
-    <Tab.Pane>
-      <PopupModel color="purple" buttonName={"New User"} content={<Register />} />
+    <Tab.Pane key="users">
+      <PopupModel color="purple" buttonName={"New User"} content={<Register/>} />
       <Grid columns={6} celled color="grey">
         <Grid.Column>username</Grid.Column>
         <Grid.Column>Registration Date</Grid.Column>
@@ -51,21 +54,17 @@ function UsersTabs() {
         <Grid.Column>Phone</Grid.Column>
         <Grid.Column>isAdmin</Grid.Column>
         <Grid.Column>actions</Grid.Column>
-        {users &&
-          users.map((user) => (
+        { store.users.content.map((user) => (
             <>
-              <AdminUsersList
-                key={user.id}
-                user={user}
-              />
+              <AdminUsersList key={user.id} user={user} />
             </>
           ))}
       </Grid>
     </Tab.Pane>
   );
-  console.log("store.posts.content>>", store.posts.content)
   const postList = (
-    <Tab.Pane>
+    // Post list (Edit/delete) tab
+    <Tab.Pane key="posts">
       <PopupModel color="purple" buttonName={"New Post"} content={<PostForm />} />
       <Grid columns={4} celled color="grey">
         <Grid.Column width={6}>Title</Grid.Column>
@@ -102,7 +101,7 @@ function UsersTabs() {
   ];
   return (
     <Tab
-      grid={{ paneWidth: 14, tabWidth: 2 }}
+      grid={{ className: "xtabs", paneWidth: 14, tabWidth: 2 }}
       menu={{ fluid: true, vertical: true, tabular: true }}
       defaultActiveIndex={0}
       panes={panes}
@@ -110,34 +109,6 @@ function UsersTabs() {
     />
   )
 }
-const FETCH_POSTS_QUERY = gql`
-  query {
-    getPosts {
-      id
-      title
-      body
-      createdAt
-      username
-      comments {
-        id
-      }
-      likes {
-        id
-      }
-    }
-  }
-`;
-const FETCH_USERS_QUERY = gql`
-  query {
-    getUsers {
-      id
-      username
-      email
-      isAdmin
-      phone
-      createdAt
-    }
-  }
-`;
+
 
 export default UsersTabs;

@@ -4,7 +4,8 @@ import { Form, Button } from 'semantic-ui-react';
 import { useForm } from '../util/hooks';
 
 function AddComment(props) {
-    const { user: { user }, postId } = props
+    const { user, postId } = props
+    console.log(user)
 
     const { onChange, onSubmit, values } = useForm(addCommentCallback, {
         postId,

@@ -1,5 +1,7 @@
-import { gql } from "@apollo/client";
-export const FETCH_POSTS_QUERY = gql`
+import {
+  gql
+} from "@apollo/client";
+export const FETCH_POSTS_QUERY = gql `
   {
     getPosts {
       id
@@ -9,4 +11,16 @@ export const FETCH_POSTS_QUERY = gql`
       username
     }
   }
+`;
+export const FETCH_USERS_QUERY = gql `
+query {
+  getUsers {
+    id
+    username
+    email
+    isAdmin
+    phone
+    createdAt
+  }
+}
 `;

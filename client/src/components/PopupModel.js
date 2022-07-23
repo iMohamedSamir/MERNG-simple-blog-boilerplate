@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, cloneElement } from 'react';
+import { render } from 'react-dom';
 import { Button, Modal } from 'semantic-ui-react';
 
 function PopupModel(props) {
+    
     const [open, setOpen] = useState(false)
+
     const { buttonName, content, icon, color, size } = props
+
+    var clonedContent = cloneElement(content, {setOpen: setOpen});
+
     return (
         <Modal
             onClose={() => setOpen(false)}
@@ -18,7 +24,7 @@ function PopupModel(props) {
                     //TODO: Move the submit button here.
                     //TODO: Return error if any.
                     //TODO: return success message.*/}
-                    {content}
+                   {clonedContent} 
                 </Modal.Description>
             </Modal.Content>
             <Modal.Actions>

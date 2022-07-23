@@ -5,25 +5,44 @@ import { useForm } from "../util/hooks";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 import { useDispatch } from "react-redux";
 import { postsActions } from "../store/PostsSlice";
+import { EditorState, convertToRaw } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-function PostForm(props) {
+function PostForm({ setOpen }) {
   const [inputError, setInputError] = useState({});
   const dispatch = useDispatch();
-  const { onSubmit, onChange, onCheckChange, values } = useForm(createPostCallback, {
+
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const { onSubmit, onChange, values } = useForm(createPostCallback, {
       title: "",
       body: "",
     }
   );
 
+  const handleEditorChange = (state) => {
+    setEditorState(state);
+    const htmlBody = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    values.body = htmlBody
+    console.log("values", htmlBody)
+
+  }
+
+
+
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
-    update(proxy, resault) {
-      const {data: { createPost }} = resault
-      let data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY,
-      });
-      data = { getPosts: [resault.data.createPost, ...data.getPosts] };
+    update(proxy, { data: { createPost } }) {
+      let data = proxy.readQuery({query: FETCH_POSTS_QUERY});
+      data = { getPosts: [createPost, ...data.getPosts] };
       proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
+      setOpen(false)
+
+      // let newCache = proxy.readQuery({query: FETCH_POSTS_QUERY});
+      // console.log("newCache", newCache)
+      
       values.title = "";
       values.body = "";
       dispatch(postsActions.AddPost(createPost))
@@ -48,12 +67,20 @@ function PostForm(props) {
             value={values.title}
             error={inputError.title}
           />
-          <Form.Input
+          {/* <Form.Input
             placeholder="xxxx"
             name="body"
             onChange={onChange}
             value={values.body}
             error={inputError.body}
+          /> */}
+          <Editor
+            editorState={editorState}
+            wrapperClassName="demo-wrapper"
+            editorClassName="demo-editor"
+            name="body"
+            toolbarClassName="Editor-toolbar"
+            onEditorStateChange={handleEditorChange}
           />
           <Button type="submit" color="teal">
             Submit

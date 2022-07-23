@@ -1,14 +1,16 @@
 import { gql, useMutation } from '@apollo/client';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Form } from 'semantic-ui-react'
 
-import { AuthContext } from '../context/auth';
+import { UserActions } from '../store/UsersSlice';
+import { FETCH_USERS_QUERY } from '../util/graphql';
 import { useForm } from '../util/hooks'
 
 
-function Register(props) {
-    
-    const context = useContext(AuthContext)
+function Register({history, setOpen}) {
+
+    const dispatch = useDispatch();
 
     const [errors, setErrors] = useState({})
 
@@ -21,14 +23,24 @@ function Register(props) {
     })
 
     const [addUser, { loading }] = useMutation(REGISTER_USER, {
-        update(_, { data }) {
-            context.login(data.register)
-            props.history.push('/')
+        variables: values,
+        update(proxy, { data: { register } }) {
+            let data = proxy.readQuery({query: FETCH_USERS_QUERY})
+            data = { getUsers: [ register, ...data.getUsers ] }
+            proxy.writeQuery({query: FETCH_USERS_QUERY, data})
+            
+            let newCache = proxy.readQuery({query: FETCH_USERS_QUERY})
+            //TODO: investgate why this returns null dispite returning obj in <PostForm>
+            // console.log("newCache>>", newCache)
+            setOpen(false)
+            dispatch(UserActions.AddUser(register))
+            // context.login(register)
+            history.push('/') 
+            
         },
         onError(err) {
-            setErrors(err && err.graphQLErrors[0].extensions ? err.graphQLErrors[0].extensions.errors : '');
+            // err && setErrors(err && err.graphQLErrors[0].extensions ? err.graphQLErrors[0].extensions.errors : '');
         },
-        variables: values,
     });
     
     function registerUserCallback() { 

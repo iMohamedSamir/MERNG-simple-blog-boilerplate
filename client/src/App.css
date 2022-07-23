@@ -41,17 +41,59 @@
   padding: 0.7em 0.9em .7em !important;
 }
 
-.ui.grid>.column:not(.row),
-.ui.grid>.row>.column {
+.ui.grid>.column:not(.stretched) {
   padding-left: 0 !important;
-  padding-right: 0 !important
+  padding-right: 0 !important;
+  z-index: 2;
 }
 
-.ui.grid>.column:not(.row) {
-  z-index: 2;
-  /* margin-right: 1px; */
+.stretched {
+  padding: 1rem 0 !important;
+}
+
+.ui.celled.grid>.row>.column {
+  padding: 0.2em !important;
 }
 
 .ui.vertical.tabular.menu {
   border-right: unset !important;
+}
+
+.delete-btn:hover,
+.edit-btn:hover {
+  background-color: #c2c2c2;
+  cursor: pointer;
+}
+
+/* Edit/Delete btn fixes */
+.delete-btn i,
+.delete-btn i,
+.ui.label>.delete.icon {
+  margin-left: 0 !important;
+}
+
+.ui.tiny.button,
+.ui.tiny.buttons {
+  font-size: .75714286rem !important;
+}
+
+/* modal  */
+.ui.modal>.image.content>.description {
+  width: 100%;
+}
+
+/* editor */
+.Editor-toolbar,
+.demo-editor {
+  position: relative;
+}
+
+.demo-editor {
+  margin: 10px 0;
+  min-height: 230px;
+  border: 1px solid #F1F1F1;
+}
+
+.DraftEditor-editorContainer {
+  padding: 0 10px;
 }
