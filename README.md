@@ -17,9 +17,9 @@
 - [x] convert contextAPI to redux store
 - [x] gql api server to heroku (for easier development).
 - [x] Admin is able to add/edit/delete posts from admin panel.
+- [x] Rich Text editor.
 
 ## To be added:
-- [ ] Admin is able to add/edit/delete users from admin panel
 - [ ] Replay comment.
 - [ ] Admin to be able to delete any Post.
 - [ ] Dynamic pages system (Admin is able to create/edit/delete new pages and its content)
@@ -27,7 +27,6 @@
 - [ ] User to be able to see their own posts in the Profile page
 - [ ] User to be able to edit his basic information.
 - [ ] users to be able to upload Post Feature Image.
-- [ ] Textrich editor.
 - [ ] User/Admin input Sanitization.
 - [ ] Only admins can promot/create admins.
 - [ ] Home Slider.
