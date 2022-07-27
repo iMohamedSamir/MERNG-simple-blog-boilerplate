@@ -18,6 +18,7 @@
 - [x] gql api server to heroku (for easier development).
 - [x] Admin is able to add/edit/delete posts from admin panel.
 - [x] Rich Text editor.
+- [x] posts summray in posts page
 
 ## To be added:
 - [ ] Replay comment.

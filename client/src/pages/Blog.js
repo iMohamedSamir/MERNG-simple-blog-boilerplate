@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useAsync } from "react-async"
 import { gql, useQuery } from '@apollo/client';
 
 import PostCard from '../components/PostCard'

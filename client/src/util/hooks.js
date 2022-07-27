@@ -9,14 +9,6 @@ export const useForm = (callback, initialState = {}) => {
             isAdmin: event.target.checked
         });
     };
-    const onEditorChange = (event) => {
-        console.log("event.target>", event)
-
-        // setValues({ 
-        //     ...values, 
-        //     [event.target.name]: event
-        // });
-    };
     const onChange = (event) => {
         setValues({ 
             ...values, 
@@ -31,7 +23,6 @@ export const useForm = (callback, initialState = {}) => {
 
     return {
         onCheckChange,
-        onEditorChange,
         onChange,
         onSubmit,
         values

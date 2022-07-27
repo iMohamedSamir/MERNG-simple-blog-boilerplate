@@ -1480,6 +1480,14 @@
     "redux-thunk" "^2.4.1"
     "reselect" "^4.1.5"
 
+"@selderee/plugin-htmlparser2@^0.6.0":
+  "integrity" "sha512-J3jpy002TyBjd4N/p6s+s90eX42H2eRhK3SbsZuvTDv977/E8p2U3zikdiehyJja66do7FlxLomZLPlvl2/xaA=="
+  "resolved" "https://registry.npmjs.org/@selderee/plugin-htmlparser2/-/plugin-htmlparser2-0.6.0.tgz"
+  "version" "0.6.0"
+  dependencies:
+    "domhandler" "^4.2.0"
+    "selderee" "^0.6.0"
+
 "@semantic-ui-react/event-stack@^3.1.2":
   "integrity" "sha512-Yd0Qf7lPCIjzJ9bZYfurlNu2RDXT6KKSyubHfYK3WjRauhxCsq6Fk2LMRI9DEvShoEU+AsLSv3NGkqXAcVp0zg=="
   "resolved" "https://registry.npmjs.org/@semantic-ui-react/event-stack/-/event-stack-3.1.2.tgz"
@@ -4153,6 +4161,11 @@
   "resolved" "https://registry.npmjs.org/deep-is/-/deep-is-0.1.4.tgz"
   "version" "0.1.4"
 
+"deepmerge@^4.2.2":
+  "integrity" "sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg=="
+  "resolved" "https://registry.npmjs.org/deepmerge/-/deepmerge-4.2.2.tgz"
+  "version" "4.2.2"
+
 "default-gateway@^2.6.0":
   "integrity" "sha512-lAc4i9QJR0YHSDFdzeBQKfZ1SRDG3hsJNEkrpcZa8QhBfidLAilT60BDEIVUUGqosFp425KOgB3uYqcnQrWafQ=="
   "resolved" "https://registry.npmjs.org/default-gateway/-/default-gateway-2.7.2.tgz"
@@ -4317,6 +4330,11 @@
   dependencies:
     "arrify" "^1.0.1"
     "path-type" "^3.0.0"
+
+"discontinuous-range@1.0.0":
+  "integrity" "sha512-c68LpLbO+7kP/b1Hr1qs8/BJ09F5khZGTxqxZuhzxpmwJKOgRFHJWIb9/KmqnqHhLdO55aOxFH/EGBvUQbL/RQ=="
+  "resolved" "https://registry.npmjs.org/discontinuous-range/-/discontinuous-range-1.0.0.tgz"
+  "version" "1.0.0"
 
 "dns-equal@^1.0.0":
   "integrity" "sha1-s55/HabrCnW6nBcySzR1PEfgZU0="
@@ -5894,7 +5912,7 @@
     "inherits" "^2.0.3"
     "minimalistic-assert" "^1.0.1"
 
-"he@1.2.x":
+"he@^1.2.0", "he@1.2.x":
   "integrity" "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw=="
   "resolved" "https://registry.npmjs.org/he/-/he-1.2.0.tgz"
   "version" "1.2.0"
@@ -6018,6 +6036,18 @@
   "integrity" "sha512-kggLXBNciKDwKf+KYsuE+V5gw4dZ7nHyGMX9m0wy7urzWjKGWyNFetmArRLvRV0VrxKN70WylFsJvMTJx02OBQ=="
   "resolved" "https://registry.npmjs.org/html-to-draftjs/-/html-to-draftjs-1.5.0.tgz"
   "version" "1.5.0"
+
+"html-to-text@^8.2.0":
+  "integrity" "sha512-CLXExYn1b++Lgri+ZyVvbUEFwzkLZppjjZOwB7X1qv2jIi8MrMEvxWX5KQ7zATAzTvcqgmtO00M2kCRMtEdOKQ=="
+  "resolved" "https://registry.npmjs.org/html-to-text/-/html-to-text-8.2.0.tgz"
+  "version" "8.2.0"
+  dependencies:
+    "@selderee/plugin-htmlparser2" "^0.6.0"
+    "deepmerge" "^4.2.2"
+    "he" "^1.2.0"
+    "htmlparser2" "^6.1.0"
+    "minimist" "^1.2.6"
+    "selderee" "^0.6.0"
 
 "html-webpack-plugin@4.0.0-alpha.2":
   "integrity" "sha512-tyvhjVpuGqD7QYHi1l1drMQTg5i+qRxpQEGbdnYFREgOKy7aFDf/ocQ/V1fuEDlQx7jV2zMap3Hj2nE9i5eGXw=="
@@ -8336,6 +8366,11 @@
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.3.tgz"
   "version" "2.29.3"
 
+"moo@^0.5.0", "moo@^0.5.1":
+  "integrity" "sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w=="
+  "resolved" "https://registry.npmjs.org/moo/-/moo-0.5.1.tgz"
+  "version" "0.5.1"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz"
@@ -8412,6 +8447,16 @@
   "integrity" "sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc="
   "resolved" "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   "version" "1.4.0"
+
+"nearley@^2.20.1":
+  "integrity" "sha512-+Mc8UaAebFzgV+KpI5n7DasuuQCHA89dmwm7JXw3TV43ukfNQ9DnBH3Mdb2g/I4Fdxc26pwimBWvjIw0UAILSQ=="
+  "resolved" "https://registry.npmjs.org/nearley/-/nearley-2.20.1.tgz"
+  "version" "2.20.1"
+  dependencies:
+    "commander" "^2.19.0"
+    "moo" "^0.5.0"
+    "railroad-diagrams" "^1.0.0"
+    "randexp" "0.4.6"
 
 "negotiator@^0.6.3":
   "integrity" "sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg=="
@@ -9137,6 +9182,14 @@
   "integrity" "sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw=="
   "resolved" "https://registry.npmjs.org/parse5/-/parse5-6.0.1.tgz"
   "version" "6.0.1"
+
+"parseley@^0.7.0":
+  "integrity" "sha512-xyOytsdDu077M3/46Am+2cGXEKM9U9QclBDv7fimY7e+BBlxh2JcBp2mgNsmkyA9uvgyTjVzDi7cP1v4hcFxbw=="
+  "resolved" "https://registry.npmjs.org/parseley/-/parseley-0.7.0.tgz"
+  "version" "0.7.0"
+  dependencies:
+    "moo" "^0.5.1"
+    "nearley" "^2.20.1"
 
 "parseurl@~1.3.2", "parseurl@~1.3.3":
   "integrity" "sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ=="
@@ -10293,6 +10346,19 @@
   dependencies:
     "performance-now" "^2.1.0"
 
+"railroad-diagrams@^1.0.0":
+  "integrity" "sha512-cz93DjNeLY0idrCNOH6PviZGRN9GJhsdm9hpn1YCS879fj4W+x5IFJhhkRZcwVgMmFF7R82UA/7Oh+R8lLZg6A=="
+  "resolved" "https://registry.npmjs.org/railroad-diagrams/-/railroad-diagrams-1.0.0.tgz"
+  "version" "1.0.0"
+
+"randexp@0.4.6":
+  "integrity" "sha512-80WNmd9DA0tmZrw9qQa62GPPWfuXJknrmVmLcxvq4uZBdYqb1wYoKTmnlGUchvVWe0XiLupYkBoXVOxz3C8DYQ=="
+  "resolved" "https://registry.npmjs.org/randexp/-/randexp-0.4.6.tgz"
+  "version" "0.4.6"
+  dependencies:
+    "discontinuous-range" "1.0.0"
+    "ret" "~0.1.10"
+
 "randomatic@^3.0.0":
   "integrity" "sha512-TuDE5KxZ0J461RVjrJZCJc+J+zCkTb1MbH9AQUq68sMhOMcy9jLcb3BrZKgp9q9Ncltdg4QVqWrH02W2EFFVYw=="
   "resolved" "https://registry.npmjs.org/randomatic/-/randomatic-3.1.1.tgz"
@@ -10342,6 +10408,13 @@
     "promise" "8.0.2"
     "raf" "3.4.1"
     "whatwg-fetch" "3.0.0"
+
+"react-app-rewired@^2.2.1":
+  "integrity" "sha512-uFQWTErXeLDrMzOJHKp0h8P1z0LV9HzPGsJ6adOtGlA/B9WfT6Shh4j2tLTTGlXOfiVx6w6iWpp7SOC5pvk+gA=="
+  "resolved" "https://registry.npmjs.org/react-app-rewired/-/react-app-rewired-2.2.1.tgz"
+  "version" "2.2.1"
+  dependencies:
+    "semver" "^5.6.0"
 
 "react-async@^10.0.1":
   "integrity" "sha512-ORUz5ca0B57QgBIzEZM5SuhJ6xFjkvEEs0gylLNlWf06vuVcLZsjIw3wx58jJkZG38p+0nUAxRgFW2b7mnVZzA=="
@@ -10487,7 +10560,7 @@
     "tiny-invariant" "^1.0.2"
     "tiny-warning" "^1.0.0"
 
-"react-scripts@^2.1.3":
+"react-scripts@^2.1.3", "react-scripts@>=2.1.3":
   "integrity" "sha512-JASD0QVVgSVleVhA9TeA+UBx+shq887hm/L+09qjZLrqIUvJZHZU+oOnhMFGot02Yop+LKfkvf9KSsTNlu/Rwg=="
   "resolved" "https://registry.npmjs.org/react-scripts/-/react-scripts-2.1.3.tgz"
   "version" "2.1.3"
@@ -11151,6 +11224,13 @@
     "ajv" "^6.1.0"
     "ajv-errors" "^1.0.0"
     "ajv-keywords" "^3.1.0"
+
+"selderee@^0.6.0":
+  "integrity" "sha512-ibqWGV5aChDvfVdqNYuaJP/HnVBhlRGSRrlbttmlMpHcLuTqqbMH36QkSs9GEgj5M88JDYLI8eyP94JaQ8xRlg=="
+  "resolved" "https://registry.npmjs.org/selderee/-/selderee-0.6.0.tgz"
+  "version" "0.6.0"
+  dependencies:
+    "parseley" "^0.7.0"
 
 "select-hose@^2.0.0":
   "integrity" "sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo="

@@ -26,7 +26,6 @@ function PostForm({ setOpen }) {
     setEditorState(state);
     const htmlBody = draftToHtml(convertToRaw(editorState.getCurrentContent()))
     values.body = htmlBody
-    console.log("values", htmlBody)
 
   }
 
