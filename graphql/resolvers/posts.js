@@ -60,7 +60,7 @@ export const postResolvers = {
                 try {
                     const post = await Post.findById(postId);
                     if (post) {
-                        if (user.username === post.username) {
+                        if (user.isAdmin || user.username === post.username) {
                             await post.delete()
                             return 'Post deleted successfully.';
                         } else throw new AuthenticationError('Action not allowed!');
