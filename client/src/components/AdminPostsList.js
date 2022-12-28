@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Label, Icon, Grid } from "semantic-ui-react";
 import { postsActions } from "../store/PostsSlice";
 
-import { FETCH_POSTS_QUERY } from "../util/graphql";
+import { DELETE_POST_MUTATION, FETCH_POSTS_QUERY } from "../util/graphql";
 import AdminEditPost from "./AdminEditPost";
 import PopupModel from "./PopupModel";
 
@@ -48,11 +48,5 @@ function AdminPostsList({ post }) {
     </>
   );
 }
-
-const DELETE_POST_MUTATION = gql`
-  mutation deletePost($postId: ID!) {
-    deletePost(postId: $postId)
-  }
-`;
 
 export default AdminPostsList;

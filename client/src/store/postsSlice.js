@@ -21,7 +21,7 @@ const PostSlice = createSlice({
     editPost: (state, action) => {
       return {
         ...state,
-        "content": current(state).content.map(post => post.id === action.payload.id && action.payload || post)
+        "content": current(state).content.map(post => post.id === action.payload.id && (action.payload || post))
       }
     },
     deletePost: (state, action) => {

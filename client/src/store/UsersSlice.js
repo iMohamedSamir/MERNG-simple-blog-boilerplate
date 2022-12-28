@@ -21,7 +21,7 @@ const UsersSlice = createSlice({
         EditUser: (state, action) => {
             return {
                 ...state,
-                "content": current(state).content.map(user => user.id === action.payload.id && action.payload || user) 
+                "content": current(state).content.map(user => user.id === action.payload.id && (action.payload || user)) 
             }
         },
         DeleteUser: (state, action) => {

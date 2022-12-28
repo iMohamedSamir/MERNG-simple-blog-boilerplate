@@ -19,12 +19,12 @@
 - [x] Admin is able to add/edit/delete posts from admin panel.
 - [x] Rich Text editor.
 - [x] posts summray in posts page
+- [x] Admin to be able to delete any Post.
+- [x] Users to be able to delete their own Posts.
 
 ## To be added:
 - [ ] Replay comment.
-- [ ] Admin to be able to delete any Post.
 - [ ] Dynamic pages system (Admin is able to create/edit/delete new pages and its content)
-- [ ] Users to be able to delete their own Posts.
 - [ ] User to be able to see their own posts in the Profile page
 - [ ] User to be able to edit his basic information.
 - [ ] users to be able to upload Post Feature Image.

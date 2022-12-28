@@ -4,8 +4,10 @@ import React, { ReactDOM } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, Grid, Image, Item, Header } from "semantic-ui-react";
+
 import AddComment from "../components/AddComment";
 import CommentComponent from "../components/Comment";
+import DeletePostBtn from '../components/DeletePostBtn';
 
 function SinglePost(props) {
   const postId = props.match.params.postId;
@@ -20,15 +22,7 @@ function SinglePost(props) {
   if (!data) {
     postMarkup = <p>loading...</p>;
   } else {
-    const {
-      id,
-      title,
-      body,
-      username,
-      createdAt,
-      likes,
-      comments,
-    } = data.getPost;
+    const { id, title, body, username, createdAt, likes, comments } = data.getPost;
     postMarkup = (
       <Grid>
         <Grid.Row>
@@ -39,6 +33,11 @@ function SinglePost(props) {
               height="300px"
             />
             <Card fluid className="no-shadow">
+              {(user.isAdmin || user.username === username) &&
+                <Card.Meta className="SinglePostDelete">
+                  <DeletePostBtn postId={postId} />
+                </Card.Meta>
+              }
               <Card.Header>
                 <h1>{title}</h1>
               </Card.Header>

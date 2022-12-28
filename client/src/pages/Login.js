@@ -22,7 +22,8 @@ function Login(props) {
       props.history.push(`/u/${userData.username}`);
     },
     onError(err) {
-      setErrors(err.graphQLErrors[0].extensions.errors);
+      console.log("errors are?>", err)
+      setErrors(err?.graphQLErrors[0]?.extensions.errors);
     },
     variables: values,
   });
